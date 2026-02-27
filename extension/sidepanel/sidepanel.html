@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeuroFlow</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+    <script src="../lib/chart.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="sp-header">
+        <span class="sp-logo">⚡ NeuroFlow</span>
+        <label class="sp-toggle" title="Enable/disable NeuroFlow">
+            <input type="checkbox" id="sp-enabled" checked />
+            <div class="sp-toggle-track"></div>
+            <div class="sp-toggle-thumb"></div>
+        </label>
+    </header>
+
+    <!-- Webcam feed -->
+    <div class="sp-cam-section">
+        <video id="sp-video" autoplay muted playsinline></video>
+        <div class="sp-cam-status">
+            <span class="sp-cam-dot" id="sp-cam-dot"></span>
+            <span id="sp-cam-status-text">Click "Start Webcam" to begin detection</span>
+        </div>
+    </div>
+
+    <!-- Start webcam -->
+    <button class="sp-start-btn" id="sp-start-btn">▶ Start Webcam Detection</button>
+
+    <!-- CLS Gauge + AU Bars -->
+    <div class="sp-gauge-wrap">
+        <div class="sp-cls-ring">
+            <svg width="72" height="72" viewBox="0 0 72 72">
+                <circle class="ring-bg" cx="36" cy="36" r="30" />
+                <circle class="ring-fill" cx="36" cy="36" r="30" id="sp-ring-fill" />
+            </svg>
+            <div class="sp-cls-center">
+                <span class="sp-cls-val" id="sp-cls-val">0.00</span>
+                <span class="sp-cls-lbl">Load</span>
+            </div>
+        </div>
+        <div class="sp-au-bars">
+            <div class="sp-bar-row">
+                <span class="sp-bar-name">AU04 Brow Furrow</span>
+                <div class="sp-bar-bg">
+                    <div class="sp-bar-fill" id="sp-bar-au04" style="background:var(--rose)"></div>
+                </div>
+                <span class="sp-bar-val" id="sp-val-au04">0.00</span>
+            </div>
+            <div class="sp-bar-row">
+                <span class="sp-bar-name">AU45 Blink Rate</span>
+                <div class="sp-bar-bg">
+                    <div class="sp-bar-fill" id="sp-bar-au45" style="background:var(--cyan)"></div>
+                </div>
+                <span class="sp-bar-val" id="sp-val-au45">0.00</span>
+            </div>
+            <div class="sp-bar-row">
+                <span class="sp-bar-name" style="color:var(--violet-l)">Cognitive Load</span>
+                <div class="sp-bar-bg">
+                    <div class="sp-bar-fill" id="sp-bar-cls" style="background:var(--violet-l)"></div>
+                </div>
+                <span class="sp-bar-val" id="sp-val-cls">0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode switcher -->
+    <div class="sp-section" style="margin-top:12px">
+        <div class="sp-section-label">Active Mode</div>
+        <div class="sp-modes">
+            <div class="sp-mode-card active neuroshield" data-mode="neuroshield" id="mc-neuroshield">
+                <span class="sp-mode-icon">🛡</span>
+                <span class="sp-mode-name">NeuroShield</span>
+                <span class="sp-mode-desc">ADHD · Sensory relief · Strips distractions</span>
+            </div>
+            <div class="sp-mode-card devcompass" data-mode="devcompass" id="mc-devcompass">
+                <span class="sp-mode-icon">💻</span>
+                <span class="sp-mode-name">DevCompass</span>
+                <span class="sp-mode-desc">Developers · Pomodoro · Break alerts</span>
+            </div>
+            <div class="sp-mode-card zenflow" data-mode="zenflow" id="mc-zenflow">
+                <span class="sp-mode-icon">🌿</span>
+                <span class="sp-mode-name">ZenFlow</span>
+                <span class="sp-mode-desc">Mental health · Breathing · Stress log</span>
+            </div>
+            <div class="sp-mode-card focuslens" data-mode="focuslens" id="mc-focuslens">
+                <span class="sp-mode-icon">🎓</span>
+                <span class="sp-mode-name">FocusLens</span>
+                <span class="sp-mode-desc">Students · Study timer · Fatigue check</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart -->
+    <div class="sp-chart-wrap">
+        <div class="sp-section-label">AU Timeline (2 min)</div>
+        <div class="sp-chart-canvas-wrap">
+            <canvas id="sp-chart"></canvas>
+        </div>
+    </div>
+
+    <!-- Simulate buttons -->
+    <div class="sp-sim-row">
+        <button class="sp-sim-btn" id="sp-sim-stress">🔴 Sim High Stress</button>
+        <button class="sp-sim-btn" id="sp-sim-calm">🟢 Sim Calm</button>
+        <button class="sp-sim-btn" id="sp-trigger-intervention">⚡ Trigger</button>
+    </div>
+
+    <!-- Session stats -->
+    <div class="sp-stats">
+        <div class="sp-stat">
+            <span class="sp-stat-label">Session</span>
+            <span class="sp-stat-value cyan" id="sp-session-time">00:00</span>
+        </div>
+        <div class="sp-stat">
+            <span class="sp-stat-label">Peak CLS</span>
+            <span class="sp-stat-value rose" id="sp-peak-cls">0.00</span>
+        </div>
+        <div class="sp-stat">
+            <span class="sp-stat-label">Avg CLS</span>
+            <span class="sp-stat-value violet" id="sp-avg-cls">0.00</span>
+        </div>
+        <div class="sp-stat">
+            <span class="sp-stat-label">Interventions</span>
+            <span class="sp-stat-value green" id="sp-interventions">0</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="sp-footer">
+        <span>⚡ NeuroFlow v1.0</span>
+        <a href="../options/options.html" target="_blank" id="sp-options-link">⚙ Settings</a>
+    </footer>
+
+    <script src="sidepanel.js" type="module"></script>
+</body>
+
+</html>

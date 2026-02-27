@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue&family=Pacifico&family=Abril+Fatface&family=Lobster&family=Oswald&family=Righteous&family=Black+Han+Sans&display=swap');
+
+/* Base chaos */
+body {
+    background-color: #fffde7;
+    overflow-x: hidden;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='10' fill='red'/%3E%3C/svg%3E") 12 12, auto;
+}
+
+/* Flashing header */
+.chaos-header {
+    background: #f00;
+    color: #ff0;
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    text-align: center;
+    padding: 12px;
+    animation: flash-bg 0.4s infinite alternate;
+    border-bottom: 6px solid #00f;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+/* Scrolling marquee-style ticker */
+.ticker {
+    background: #00f;
+    color: #ff0;
+    font-family: 'Comic Neue', cursive;
+    font-size: 1.1rem;
+    padding: 6px 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.ticker-inner {
+    display: inline-block;
+    animation: marquee 8s linear infinite;
+}
+
+/* Nav chaos */
+.chaos-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 10px;
+    background: linear-gradient(90deg, #f00, #0f0, #00f, #ff0, #f0f);
+    background-size: 400% 400%;
+    animation: rainbow-bg 2s linear infinite;
+}
+
+.chaos-nav a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem;
+    color: #fff;
+    text-decoration: underline wavy #ff0;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    text-transform: uppercase;
+    animation: wobble 1s infinite alternate;
+}
+
+.chaos-nav a:nth-child(2n) {
+    font-family: 'Righteous', cursive;
+    font-size: 1rem;
+}
+
+.chaos-nav a:nth-child(3n) {
+    font-family: 'Lobster', cursive;
+    font-size: 1.2rem;
+    color: #ff0;
+}
+
+/* Main layout chaos */
+.chaos-layout {
+    display: grid;
+    grid-template-columns: 200px 1fr 180px;
+    gap: 4px;
+    padding: 8px;
+    min-height: 70vh;
+}
+
+/* Sidebar chaos */
+.sidebar-left {
+    background: repeating-linear-gradient(45deg, #f9a8d4, #f9a8d4 10px, #bfdbfe 10px, #bfdbfe 20px);
+    padding: 10px;
+    font-family: 'Comic Neue', cursive;
+    font-size: 1rem;
+    border: 3px dashed red;
+}
+
+.sidebar-left h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.4rem;
+    color: #7c3aed;
+}
+
+.sidebar-left a {
+    display: block;
+    color: #0f0;
+    font-size: 0.8rem;
+    margin: 3px 0;
+    text-decoration: underline overline line-through;
+}
+
+/* Main content chaos */
+.chaos-main {
+    background: #fffde7;
+    padding: 12px;
+    border: 5px solid #ff0;
+    border-left: 5px dotted #f00;
+    border-right: 5px dashed #00f;
+}
+
+.chaos-main h1 {
+    font-family: 'Abril Fatface', serif;
+    font-size: 2.5rem;
+    color: #7c3aed;
+    text-shadow: 3px 3px 0 #ff0, -2px -2px 0 #f00;
+    animation: shake 0.5s infinite;
+}
+
+.chaos-main h2 {
+    font-family: 'Lobster', cursive;
+    font-size: 1.8rem;
+    color: #f00;
+}
+
+.chaos-main p {
+    font-family: 'Comic Neue', cursive;
+    font-size: 0.78rem;
+    color: #333;
+    line-height: 1.2;
+    column-count: 2;
+    column-gap: 4px;
+}
+
+.chaos-main p:nth-child(2n) {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 1.1rem;
+    color: #0000aa;
+}
+
+/* Ad banners */
+.ad-banner {
+    background: linear-gradient(135deg, #ff0, #f00, #ff0);
+    border: 4px solid #000;
+    padding: 10px;
+    text-align: center;
+    animation: flash-bg 0.3s infinite alternate;
+    font-family: 'Righteous', cursive;
+    font-size: 1.3rem;
+    color: #000;
+    cursor: pointer;
+    border-radius: 0;
+    margin: 8px 0;
+    box-shadow: 4px 4px 0 #00f, -4px -4px 0 #f0f;
+}
+
+.ad-banner span {
+    display: block;
+    font-size: 0.7rem;
+    animation: blink 0.5s infinite;
+}
+
+/* Right sidebar */
+.sidebar-right {
+    background: #ffe4e1;
+    padding: 8px;
+    font-family: 'Comic Neue', cursive;
+    border: 3px solid #0f0;
+    border-style: double;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.widget-box {
+    background: linear-gradient(135deg, #a78bfa, #f0abfc);
+    border: 2px solid #7c3aed;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    animation: float-chaos 2s infinite alternate;
+}
+
+.widget-box h4 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* Pop-up modal */
+.chaos-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+    border: 6px solid #000;
+    padding: 32px;
+    z-index: 9999;
+    text-align: center;
+    border-radius: 6px;
+    box-shadow: 0 0 0 8px #00f, 0 0 0 16px #f00;
+    animation: modal-bounce 0.8s infinite alternate;
+    max-width: 380px;
+    width: 90%;
+}
+
+.chaos-modal h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.8rem;
+    color: #000;
+}
+
+.chaos-modal p {
+    font-family: 'Comic Neue', cursive;
+    font-size: 1rem;
+    color: #333;
+}
+
+.chaos-modal-btn {
+    margin-top: 16px;
+    padding: 12px 24px;
+    font-family: 'Righteous', cursive;
+    font-size: 1.1rem;
+    background: #000;
+    color: #ff0;
+    border: 3px solid #ff0;
+    cursor: pointer;
+    display: inline-block;
+    animation: glow-btn 0.5s infinite alternate;
+}
+
+.chaos-modal-close {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    font-size: 0.65rem;
+    color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: monospace;
+}
+
+/* Overlay */
+.chaos-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+}
+
+/* Spinning decoration */
+.spinner-deco {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    font-size: 2rem;
+}
+
+/* Blinking text */
+.blink {
+    animation: blink 0.6s step-end infinite;
+}
+
+/* ───── Chaos Keyframes ───── */
+@keyframes flash-bg {
+    from {
+        background-color: #f00;
+    }
+
+    to {
+        background-color: #ff0;
+    }
+}
+
+@keyframes rainbow-bg {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(100vw);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes wobble {
+    from {
+        transform: rotate(-3deg) scale(0.98);
+    }
+
+    to {
+        transform: rotate(3deg) scale(1.02);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px) rotate(-1deg);
+    }
+
+    75% {
+        transform: translateX(3px) rotate(1deg);
+    }
+}
+
+@keyframes blink {
+    from {
+        visibility: visible;
+    }
+
+    50% {
+        visibility: hidden;
+    }
+
+    to {
+        visibility: visible;
+    }
+}
+
+@keyframes float-chaos {
+    from {
+        transform: translateY(0) rotate(-1deg);
+    }
+
+    to {
+        transform: translateY(-8px) rotate(1deg);
+    }
+}
+
+@keyframes modal-bounce {
+    from {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glow-btn {
+    from {
+        box-shadow: 0 0 10px #ff0;
+    }
+
+    to {
+        box-shadow: 0 0 30px #ff0, 0 0 60px #f00;
+    }
+}

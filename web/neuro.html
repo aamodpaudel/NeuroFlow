@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopSimple — Clean Shopping Experience</title>
+    <meta name="description" content="A calm, accessible shopping experience designed for everyone." />
+    <link rel="stylesheet" href="css/neuro.css" />
+</head>
+
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="neuro-header">
+        <a href="index.html" class="neuro-logo" aria-label="ShopSimple Home">ShopSimple</a>
+        <nav aria-label="Main navigation">
+            <ul class="neuro-nav">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <div class="neuro-hero">
+            <div class="neuro-label">Welcome</div>
+            <h1>Find what you need, without the noise.</h1>
+            <p class="hero-desc">
+                ShopSimple is designed for people who want a calm, focused shopping experience.
+                No popups. No flashing sales. Just the products you're looking for.
+            </p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                <a href="#products" class="neuro-btn" id="browse-btn">Browse Products</a>
+                <a href="dashboard.html" class="neuro-btn neuro-btn-outline" id="back-demo-btn">← Back to Demo</a>
+            </div>
+        </div>
+
+        <div class="callout">
+            <strong>Neuro-Inclusive Mode is active.</strong> This page uses a single font, no animations, generous
+            spacing, and high contrast to reduce cognitive load.
+        </div>
+
+        <!-- Products -->
+        <section id="products">
+            <h2>Featured Products</h2>
+            <p>Three products. Clear prices. No tricks.</p>
+
+            <div style="display:flex;flex-direction:column;gap:16px;">
+
+                <div class="neuro-card" id="product-1">
+                    <div style="display:flex;align-items:center;gap:20px;">
+                        <div style="font-size:3rem;min-width:60px;text-align:center;" aria-hidden="true">📱</div>
+                        <div style="flex:1;">
+                            <h3 style="margin:0 0 6px;">SmartPhone Ultra</h3>
+                            <p style="margin:0 0 12px;">A reliable smartphone with a long-lasting battery and clear
+                                display. Good for calls, messages, and everyday tasks.</p>
+                            <div style="display:flex;align-items:center;gap:16px;">
+                                <span style="font-size:1.4rem;font-weight:700;color:var(--calm-accent);">$449</span>
+                                <a href="#" class="neuro-btn" style="padding:10px 20px;font-size:0.9rem;"
+                                    id="buy-phone">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neuro-card" id="product-2">
+                    <div style="display:flex;align-items:center;gap:20px;">
+                        <div style="font-size:3rem;min-width:60px;text-align:center;" aria-hidden="true">💻</div>
+                        <div style="flex:1;">
+                            <h3 style="margin:0 0 6px;">Laptop Pro</h3>
+                            <p style="margin:0 0 12px;">A fast and lightweight laptop for work and study. Runs quietly
+                                and has a comfortable keyboard for long sessions.</p>
+                            <div style="display:flex;align-items:center;gap:16px;">
+                                <span style="font-size:1.4rem;font-weight:700;color:var(--calm-accent);">$899</span>
+                                <a href="#" class="neuro-btn" style="padding:10px 20px;font-size:0.9rem;"
+                                    id="buy-laptop">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="neuro-card" id="product-3">
+                    <div style="display:flex;align-items:center;gap:20px;">
+                        <div style="font-size:3rem;min-width:60px;text-align:center;" aria-hidden="true">⌚</div>
+                        <div style="flex:1;">
+                            <h3 style="margin:0 0 6px;">SmartWatch</h3>
+                            <p style="margin:0 0 12px;">Tracks your steps, sleep, and heart rate. Connects to your phone
+                                for gentle notifications. Calm by design.</p>
+                            <div style="display:flex;align-items:center;gap:16px;">
+                                <span style="font-size:1.4rem;font-weight:700;color:var(--calm-accent);">$199</span>
+                                <a href="#" class="neuro-btn" style="padding:10px 20px;font-size:0.9rem;"
+                                    id="buy-watch">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="about">
+            <h2>Designed for Everyone</h2>
+            <p>ShopSimple follows Web Content Accessibility Guidelines (WCAG 2.1 AA) and neuro-inclusive design
+                principles.</p>
+
+            <ul class="feature-list">
+                <li>
+                    <div class="feature-icon" aria-hidden="true">🔤</div>
+                    <div class="feature-text">
+                        <strong>Single typeface</strong>
+                        Inter — readable, consistent, no decorative fonts competing for attention.
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-icon" aria-hidden="true">🎨</div>
+                    <div class="feature-text">
+                        <strong>High contrast colours</strong>
+                        4.5:1 minimum contrast ratio throughout. Clear visual hierarchy.
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-icon" aria-hidden="true">🚫</div>
+                    <div class="feature-text">
+                        <strong>No animations</strong>
+                        All CSS transitions and animations are disabled in this mode.
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-icon" aria-hidden="true">📐</div>
+                    <div class="feature-text">
+                        <strong>Generous spacing</strong>
+                        Line height 1.9×, max-width 860px, large click targets (min 44×44px).
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-icon" aria-hidden="true">🛑</div>
+                    <div class="feature-text">
+                        <strong>No popups or interruptions</strong>
+                        You decide when and how you interact. No timers, no pressure.
+                    </div>
+                </li>
+                <li>
+                    <div class="feature-icon" aria-hidden="true">⌨️</div>
+                    <div class="feature-text">
+                        <strong>Fully keyboard navigable</strong>
+                        Every element is reachable and usable with a keyboard. Focus indicators are always visible.
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <div class="neuro-card">
+                <p style="margin-bottom:20px;">Have a question? We respond within 1 business day. No chatbots.</p>
+                <div style="display:flex;flex-direction:column;gap:14px;max-width:500px;">
+                    <div>
+                        <label for="contact-name"
+                            style="display:block;font-weight:600;color:var(--calm-text);margin-bottom:6px;font-size:0.95rem;">Your
+                            name</label>
+                        <input id="contact-name" type="text" placeholder="Alex"
+                            style="width:100%;padding:12px 14px;border:1.5px solid var(--calm-border);border-radius:8px;font-size:1rem;font-family:'Inter',sans-serif;color:var(--calm-text);background:var(--calm-bg);" />
+                    </div>
+                    <div>
+                        <label for="contact-email"
+                            style="display:block;font-weight:600;color:var(--calm-text);margin-bottom:6px;font-size:0.95rem;">Email
+                            address</label>
+                        <input id="contact-email" type="email" placeholder="alex@example.com"
+                            style="width:100%;padding:12px 14px;border:1.5px solid var(--calm-border);border-radius:8px;font-size:1rem;font-family:'Inter',sans-serif;color:var(--calm-text);background:var(--calm-bg);" />
+                    </div>
+                    <div>
+                        <label for="contact-msg"
+                            style="display:block;font-weight:600;color:var(--calm-text);margin-bottom:6px;font-size:0.95rem;">Message</label>
+                        <textarea id="contact-msg" rows="4" placeholder="How can we help?"
+                            style="width:100%;padding:12px 14px;border:1.5px solid var(--calm-border);border-radius:8px;font-size:1rem;font-family:'Inter',sans-serif;color:var(--calm-text);background:var(--calm-bg);resize:vertical;"></textarea>
+                    </div>
+                    <button class="neuro-btn" id="send-msg-btn" style="align-self:flex-start;">Send Message</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="neuro-footer">
+        <span>© 2026 ShopSimple — Neuro-Inclusive Mode</span>
+        <a href="dashboard.html" style="color:var(--calm-accent);text-decoration:none;font-weight:600;">← Back to
+            NeuroFlow Demo</a>
+    </footer>
+
+</body>
+
+</html>

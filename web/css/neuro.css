@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ───── Calm Design System ───── */
+:root {
+    --calm-bg: #FAF9F6;
+    --calm-surface: #FFFFFF;
+    --calm-text: #1A1A2E;
+    --calm-subtle: #4A5568;
+    --calm-border: #E2E8F0;
+    --calm-accent: #5850EC;
+    --calm-accent-bg: #EEF2FF;
+    --calm-success: #2D6A4F;
+    --calm-radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--calm-bg);
+    color: var(--calm-text);
+    font-size: 18px;
+    /* large, readable */
+    line-height: 1.9;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* NO animations, NO transitions on primary elements */
+*,
+*::before,
+*::after {
+    animation: none !important;
+    transition: color 0.2s ease, background-color 0.2s ease !important;
+}
+
+/* ───── Header ───── */
+.neuro-header {
+    padding: 24px 0 20px;
+    border-bottom: 2px solid var(--calm-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.neuro-logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--calm-accent);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+.neuro-nav {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+}
+
+.neuro-nav a {
+    font-size: 1rem;
+    color: var(--calm-subtle);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.neuro-nav a:hover {
+    background: var(--calm-accent-bg);
+    color: var(--calm-accent);
+}
+
+.neuro-nav a:focus {
+    outline: 3px solid var(--calm-accent);
+    outline-offset: 2px;
+}
+
+/* ───── Main Content ───── */
+main {
+    padding: 48px 0;
+}
+
+.neuro-hero {
+    margin-bottom: 48px;
+}
+
+.neuro-label {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--calm-accent);
+    background: var(--calm-accent-bg);
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--calm-text);
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--calm-text);
+    margin: 36px 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--calm-border);
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--calm-text);
+    margin: 24px 0 8px;
+}
+
+p {
+    color: var(--calm-subtle);
+    margin-bottom: 16px;
+    max-width: 680px;
+}
+
+/* ───── Hero desc ───── */
+.hero-desc {
+    font-size: 1.1rem;
+    color: var(--calm-subtle);
+    max-width: 600px;
+    margin-bottom: 28px;
+}
+
+/* ───── CTA Button ───── */
+.neuro-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: var(--calm-accent);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--calm-radius);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+}
+
+.neuro-btn:hover {
+    background: #4338CA;
+}
+
+.neuro-btn:focus {
+    outline: 3px solid var(--calm-accent);
+    outline-offset: 3px;
+}
+
+.neuro-btn-outline {
+    background: transparent;
+    color: var(--calm-accent);
+    border: 2px solid var(--calm-accent);
+}
+
+.neuro-btn-outline:hover {
+    background: var(--calm-accent-bg);
+}
+
+/* ───── Content Card ───── */
+.neuro-card {
+    background: var(--calm-surface);
+    border: 1.5px solid var(--calm-border);
+    border-radius: var(--calm-radius);
+    padding: 28px;
+    margin-bottom: 20px;
+}
+
+.neuro-card h3 {
+    margin-top: 0;
+}
+
+/* ───── Feature list ───── */
+.feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--calm-border);
+    font-size: 1rem;
+    color: var(--calm-subtle);
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+.feature-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 8px;
+    background: var(--calm-accent-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.feature-text strong {
+    display: block;
+    color: var(--calm-text);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+/* ───── Info callout ───── */
+.callout {
+    background: var(--calm-accent-bg);
+    border-left: 4px solid var(--calm-accent);
+    border-radius: 0 var(--calm-radius) var(--calm-radius) 0;
+    padding: 16px 20px;
+    margin: 24px 0;
+    font-size: 0.95rem;
+    color: var(--calm-subtle);
+}
+
+.callout strong {
+    color: var(--calm-accent);
+}
+
+/* ───── Footer ───── */
+.neuro-footer {
+    padding: 28px 0;
+    border-top: 2px solid var(--calm-border);
+    color: var(--calm-subtle);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 48px;
+}
+
+/* ───── Scrollbar ───── */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--calm-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E0;
+    border-radius: 4px;
+}
+
+/* ───── Focus visible ───── */
+:focus-visible {
+    outline: 3px solid var(--calm-accent);
+    outline-offset: 3px;
+}
+
+/* ───── Skip link ───── */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--calm-accent);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 0 0 8px 0;
+    z-index: 1000;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 0;
+}

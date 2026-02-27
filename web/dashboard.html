@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeuroFlow — Stress-Test Dashboard</title>
+    <meta name="description"
+        content="NeuroFlow live demo: watch AU04 cognitive stress spike on the Chaos UI and drop instantly in Neuro-Inclusive Mode." />
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            overflow: hidden;
+            padding-top: 64px;
+        }
+
+        .dashboard-root {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            grid-template-rows: calc(100vh - 64px);
+            height: calc(100vh - 64px);
+            gap: 0;
+        }
+
+        /* ── Left panel (iframe container) ── */
+        .panel-ui {
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .panel-ui-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .panel-ui-bar .label-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #demo-iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+            min-height: 0;
+        }
+
+        /* ── Right panel (controls + chart) ── */
+        .panel-data {
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-surface);
+            overflow-y: auto;
+        }
+
+        /* Mode toggle button */
+        #mode-toggle-btn {
+            font-size: 0.95rem;
+            padding: 12px 20px;
+        }
+
+        /* Stress-test alert */
+        #stress-alert {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            background: rgba(244, 63, 94, 0.12);
+            border-bottom: 1px solid rgba(244, 63, 94, 0.3);
+            font-size: 0.85rem;
+            color: var(--rose);
+            font-weight: 600;
+        }
+
+        #stress-alert .alert-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--rose);
+            animation: pulse 1s infinite;
+        }
+
+        /* Score panel */
+        .score-section {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .score-section h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .score-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .score-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            width: 140px;
+            flex-shrink: 0;
+        }
+
+        .score-bar-bg {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s ease, background 0.5s ease;
+        }
+
+        .score-val {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            width: 40px;
+            text-align: right;
+        }
+
+        /* Chart section */
+        .chart-section {
+            padding: 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-section h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .chart-wrap {
+            flex: 1;
+            min-height: 220px;
+            position: relative;
+        }
+
+        /* Webcam controls */
+        .webcam-section {
+            padding: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .webcam-section h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        #webcam-mini {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #000;
+            display: block;
+        }
+
+        .webcam-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .webcam-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+
+        .webcam-dot.active {
+            background: var(--green);
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Data source badge */
+        #data-source-badge {
+            position: fixed;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 100px;
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            letter-spacing: 0.05em;
+            z-index: 99;
+        }
+
+        #data-source-badge.sim {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--amber);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        /* Verdict bar */
+        .verdict-bar {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        #mode-verdict {
+            color: var(--rose);
+        }
+
+        /* Mode section */
+        .mode-section {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Nav -->
+    <nav>
+        <a href="index.html" class="nav-logo">⚡ NeuroFlow</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="chaos.html" target="_blank">Chaos UI ↗</a></li>
+            <li><a href="neuro.html" target="_blank">Neuro UI ↗</a></li>
+        </ul>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <span id="data-source-badge">🟢 FLASK LIVE</span>
+        </div>
+    </nav>
+
+    <!-- Stress Alert -->
+    <div id="stress-alert">
+        <span class="alert-dot"></span>
+        ⚠ HIGH COGNITIVE LOAD DETECTED — AU04 above danger threshold. Intervene now!
+    </div>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-root">
+
+        <!-- Left: UI Panel -->
+        <div class="panel-ui">
+            <div class="panel-ui-bar">
+                <div class="label-group">
+                    <span id="mode-badge" class="badge badge-rose" id="mode-badge">● CHAOS UI</span>
+                    <span id="mode-label" style="font-size:0.8rem;color:var(--text-secondary);">CHAOS UI ACTIVE</span>
+                </div>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <a href="chaos.html" target="_blank" class="btn btn-secondary"
+                        style="padding:7px 12px;font-size:0.75rem;">Open Fullscreen ↗</a>
+                </div>
+            </div>
+            <iframe id="demo-iframe" src="chaos.html" title="UI Demo Panel"
+                sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+
+        <!-- Right: Data Panel -->
+        <div class="panel-data">
+
+            <!-- Mode Toggle -->
+            <div class="mode-section">
+                <button class="btn btn-success" id="mode-toggle-btn">✨ Switch to Neuro-Inclusive Mode</button>
+            </div>
+
+            <!-- Verdict -->
+            <div class="verdict-bar">
+                <div id="mode-verdict">⚠ Cognitive overload detected. Click to intervene!</div>
+            </div>
+
+            <!-- Live Scores -->
+            <div class="score-section">
+                <h4>Live Action Unit Scores</h4>
+                <div class="score-row">
+                    <span class="score-label">AU04 — Brow Furrow</span>
+                    <div class="score-bar-bg">
+                        <div class="score-bar-fill" id="bar-au04"></div>
+                    </div>
+                    <span class="score-val" id="val-au04">–</span>
+                </div>
+                <div class="score-row">
+                    <span class="score-label">AU45 — Blink Rate</span>
+                    <div class="score-bar-bg">
+                        <div class="score-bar-fill" id="bar-au45"></div>
+                    </div>
+                    <span class="score-val" id="val-au45">–</span>
+                </div>
+                <div class="score-row">
+                    <span class="score-label" style="color:var(--violet-light);">Cognitive Load Score</span>
+                    <div class="score-bar-bg">
+                        <div class="score-bar-fill" id="bar-cls"
+                            style="background:linear-gradient(90deg,var(--violet),var(--violet-light));"></div>
+                    </div>
+                    <span class="score-val" id="val-cls">–</span>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="chart-section">
+                <h4>AU Timeline (live)</h4>
+                <div class="chart-wrap">
+                    <canvas id="au-chart"></canvas>
+                </div>
+            </div>
+
+            <!-- Webcam -->
+            <div class="webcam-section">
+                <h4>MediaPipe Webcam Feed</h4>
+                <video id="webcam-mini" autoplay muted playsinline></video>
+                <div class="webcam-status">
+                    <span class="webcam-dot" id="webcam-dot"></span>
+                    <span id="webcam-status-text">Initializing webcam…</span>
+                </div>
+                <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <button class="btn btn-secondary" id="start-webcam-btn"
+                        style="padding:8px 14px;font-size:0.75rem;">▶ Start Webcam</button>
+                    <button class="btn" id="demo-focus-btn"
+                        style="padding:8px 14px;font-size:0.75rem;background:rgba(124,58,237,0.2);color:var(--violet-light);border:1px solid rgba(124,58,237,0.3);">🧪
+                        Simulate Focus Mode</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Hidden video for MediaPipe (full-quality feed) -->
+    <video id="mp-video" autoplay muted playsinline
+        style="position:absolute;visibility:hidden;width:1px;height:1px;"></video>
+
+    <script type="module">
+        import { initDashboard, switchToNeuroMode, switchToChaosMode } from './js/dashboard.js';
+        import { startNeuroFlow, triggerFocusMode, releaseFocusMode } from './js/mediapipe.js';
+
+        // Init chart + polling
+        initDashboard('au-chart');
+
+        // Mode toggle
+        document.getElementById('mode-toggle-btn').addEventListener('click', switchToNeuroMode);
+
+        // Webcam start button
+        document.getElementById('start-webcam-btn').addEventListener('click', async () => {
+            const mpVideo = document.getElementById('mp-video');
+            const miniVideo = document.getElementById('webcam-mini');
+            const dot = document.getElementById('webcam-dot');
+            const statusTxt = document.getElementById('webcam-status-text');
+
+            try {
+                await startNeuroFlow(mpVideo, ({ browDown, focusModeOn }) => {
+                    // Mirror feed to visible mini video
+                    if (mpVideo.srcObject && !miniVideo.srcObject) {
+                        miniVideo.srcObject = mpVideo.srcObject;
+                    }
+                    statusTxt.textContent = `Brow index: ${browDown.toFixed(3)} ${focusModeOn ? '🔴 Focus Mode ON' : '🟢 Normal'}`;
+                    dot.classList.toggle('active', true);
+                });
+                statusTxt.textContent = 'Webcam active — furrowing brows for 3s triggers Focus Mode';
+                dot.classList.add('active');
+            } catch (e) {
+                statusTxt.textContent = 'Webcam unavailable: ' + e.message;
+            }
+        });
+
+        // Simulate focus mode button
+        document.getElementById('demo-focus-btn').addEventListener('click', () => {
+            if (document.body.classList.contains('high-load-mode')) {
+                releaseFocusMode();
+                document.getElementById('demo-focus-btn').textContent = '🧪 Simulate Focus Mode';
+            } else {
+                triggerFocusMode();
+                document.getElementById('demo-focus-btn').textContent = '❎ Release Focus Mode';
+            }
+        });
+
+        // Listen for focus mode events
+        document.addEventListener('neuroflow:focus-mode-on', (e) => {
+            console.log('[Dashboard] Focus Mode ON:', e.detail.message);
+        });
+        document.addEventListener('neuroflow:focus-mode-off', (e) => {
+            console.log('[Dashboard] Focus Mode OFF:', e.detail.message);
+        });
+    </script>
+</body>
+
+</html>

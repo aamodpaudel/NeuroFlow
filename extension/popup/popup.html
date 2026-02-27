@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>NeuroFlow</title>
+    <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="pp-header">
+        <span class="pp-logo">⚡ NeuroFlow</span>
+        <label class="pp-toggle" title="Enable/disable">
+            <input type="checkbox" id="pp-enabled" checked />
+            <div class="pp-toggle-track"></div>
+            <div class="pp-toggle-thumb"></div>
+        </label>
+    </header>
+
+    <!-- Score ring + meta -->
+    <div class="pp-score-row">
+        <div class="pp-score-ring">
+            <svg width="52" height="52" viewBox="0 0 52 52">
+                <circle class="pr-bg" cx="26" cy="26" r="22" />
+                <circle class="pr-fill" cx="26" cy="26" r="22" id="pp-ring-fill" />
+            </svg>
+            <div class="pp-ring-center">
+                <span class="pp-ring-val" id="pp-cls-val">–</span>
+                <span class="pp-ring-lbl">Load</span>
+            </div>
+        </div>
+        <div class="pp-score-meta">
+            <div class="pp-meta-row">
+                <span class="pp-meta-label">AU04 Brow Furrow</span>
+                <span class="pp-meta-val" id="pp-au04-val">–</span>
+            </div>
+            <div class="pp-meta-row">
+                <span class="pp-meta-label">AU45 Blink Rate</span>
+                <span class="pp-meta-val" id="pp-au45-val">–</span>
+            </div>
+            <div class="pp-meta-row">
+                <span class="pp-meta-label">Session</span>
+                <span class="pp-meta-val" id="pp-session">–</span>
+            </div>
+            <div class="pp-meta-row">
+                <span class="pp-meta-label">Mode</span>
+                <span class="pp-meta-val" id="pp-mode-val">NeuroShield</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode selection -->
+    <div class="pp-modes">
+        <div class="pp-mode active" data-mode="neuroshield" id="pp-mc-neuroshield">
+            <span class="pp-mode-icon">🛡</span> NeuroShield
+        </div>
+        <div class="pp-mode" data-mode="devcompass" id="pp-mc-devcompass">
+            <span class="pp-mode-icon">💻</span> DevCompass
+        </div>
+        <div class="pp-mode" data-mode="zenflow" id="pp-mc-zenflow">
+            <span class="pp-mode-icon">🌿</span> ZenFlow
+        </div>
+        <div class="pp-mode" data-mode="focuslens" id="pp-mc-focuslens">
+            <span class="pp-mode-icon">🎓</span> FocusLens
+        </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="pp-actions">
+        <button class="pp-btn pp-btn-primary" id="pp-open-panel">Open Dashboard ↗</button>
+        <button class="pp-btn pp-btn-secondary" id="pp-open-options">⚙ Settings</button>
+    </div>
+
+    <!-- Status bar -->
+    <div class="pp-status">
+        <span class="pp-status-dot" id="pp-dot"></span>
+        <span id="pp-status-text">Loading…</span>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

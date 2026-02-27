@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+
+:root {
+    --bg: #050810;
+    --surface: #0D1117;
+    --violet: #7C3AED;
+    --violet-l: #A855F7;
+    --cyan: #00D4FF;
+    --green: #22C55E;
+    --rose: #F43F5E;
+    --amber: #F59E0B;
+    --text: #F1F5F9;
+    --text-2: #94A3B8;
+    --text-3: #475569;
+    --border: rgba(255, 255, 255, 0.08);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    width: 320px;
+    min-height: 280px;
+    padding: 0;
+}
+
+/* ── Header ── */
+.pp-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.pp-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--violet-l), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    flex: 1;
+}
+
+.pp-toggle {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.pp-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.pp-toggle-track {
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+    background: var(--text-3);
+    transition: background 0.3s;
+}
+
+.pp-toggle input:checked+.pp-toggle-track {
+    background: var(--violet);
+}
+
+.pp-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.3s;
+}
+
+.pp-toggle input:checked~.pp-toggle-thumb {
+    transform: translateX(16px);
+}
+
+/* ── Score row ── */
+.pp-score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.pp-score-ring {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+}
+
+.pp-score-ring svg {
+    transform: rotate(-90deg);
+}
+
+.pp-score-ring .pr-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.06);
+    stroke-width: 5;
+}
+
+.pp-score-ring .pr-fill {
+    fill: none;
+    stroke: var(--violet);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 138;
+    stroke-dashoffset: 138;
+    transition: all 0.5s ease;
+}
+
+.pp-ring-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pp-ring-val {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.pp-ring-lbl {
+    font-size: 0.5rem;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pp-score-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pp-meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+}
+
+.pp-meta-label {
+    color: var(--text-3);
+}
+
+.pp-meta-val {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.pp-meta-val.ok {
+    color: var(--green);
+}
+
+.pp-meta-val.warn {
+    color: var(--amber);
+}
+
+.pp-meta-val.bad {
+    color: var(--rose);
+}
+
+/* ── Mode pills (compact) ── */
+.pp-modes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.pp-mode {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-2);
+}
+
+.pp-mode:hover {
+    border-color: rgba(124, 58, 237, 0.4);
+    color: var(--text);
+}
+
+.pp-mode.active {
+    border-color: var(--violet);
+    color: var(--text);
+    background: rgba(124, 58, 237, 0.1);
+}
+
+.pp-mode.active[data-mode="devcompass"] {
+    border-color: var(--cyan);
+    background: rgba(0, 212, 255, 0.08);
+}
+
+.pp-mode.active[data-mode="zenflow"] {
+    border-color: var(--green);
+    background: rgba(34, 197, 94, 0.08);
+}
+
+.pp-mode.active[data-mode="focuslens"] {
+    border-color: var(--amber);
+    background: rgba(245, 158, 11, 0.08);
+}
+
+.pp-mode-icon {
+    font-size: 1rem;
+}
+
+/* ── Actions ── */
+.pp-actions {
+    display: flex;
+    gap: 6px;
+    padding: 10px 14px 12px;
+}
+
+.pp-btn {
+    flex: 1;
+    padding: 9px 6px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+}
+
+.pp-btn-primary {
+    background: linear-gradient(135deg, var(--violet), var(--violet-l));
+    color: #fff;
+}
+
+.pp-btn-secondary {
+    background: transparent;
+    color: var(--text-2);
+    border: 1.5px solid var(--border);
+}
+
+.pp-btn-secondary:hover {
+    border-color: rgba(124, 58, 237, 0.4);
+    color: var(--text);
+}
+
+/* ── Status bar ── */
+.pp-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px 8px;
+    font-size: 0.65rem;
+    color: var(--text-3);
+}
+
+.pp-status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--text-3);
+    flex-shrink: 0;
+}
+
+.pp-status-dot.on {
+    background: var(--green);
+    animation: pp-pulse 1.5s infinite;
+}
+
+@keyframes pp-pulse {
+
+    0%,
+    100% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: 0.4
+    }
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NeuroFlow — Neuro-Inclusive Web Accessibility</title>
+  <meta name="description" content="NeuroFlow uses MediaPipe and Py-Feat to detect cognitive overload and adapt web UIs in real-time for neurodivergent users."/>
+  <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <a href="index.html" class="nav-logo">⚡ NeuroFlow</a>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#tech">Tech Stack</a></li>
+    <li><a href="#use-cases">Use Cases</a></li>
+    <li><a href="dashboard.html">Live Demo</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="chaos.html" class="btn btn-secondary" style="padding:10px 18px;font-size:0.85rem;">Chaos UI</a>
+    <a href="dashboard.html" class="btn btn-primary" style="padding:10px 18px;font-size:0.85rem;">🚀 Launch Demo</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="dot"></span> Hackathon 2026 Project</div>
+    <h1>The Web Was Not Built<br><span class="gradient-text">For Every Brain.</span></h1>
+    <p>NeuroFlow detects cognitive overload in real-time using your webcam and automatically calms the web for ADHD and Autistic users.</p>
+    <div class="hero-cta">
+      <a href="dashboard.html" class="btn btn-primary" id="launch-demo-btn">🧠 Launch Stress-Test Demo</a>
+      <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section style="padding:32px 48px;background:rgba(255,255,255,0.02);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="display:flex;gap:48px;justify-content:center;flex-wrap:wrap;text-align:center;">
+    <div class="animate-slide-up delay-1">
+      <div style="font-size:2.4rem;font-weight:800;font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,var(--violet-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">15–20%</div>
+      <div style="color:var(--text-muted);font-size:0.85rem;margin-top:4px;">of people are neurodivergent</div>
+    </div>
+    <div class="animate-slide-up delay-2">
+      <div style="font-size:2.4rem;font-weight:800;font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,var(--violet-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">3 sec</div>
+      <div style="color:var(--text-muted);font-size:0.85rem;margin-top:4px;">to detect cognitive overload</div>
+    </div>
+    <div class="animate-slide-up delay-3">
+      <div style="font-size:2.4rem;font-weight:800;font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,var(--violet-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0 data</div>
+      <div style="color:var(--text-muted);font-size:0.85rem;margin-top:4px;">leaves your device</div>
+    </div>
+    <div class="animate-slide-up delay-4">
+      <div style="font-size:2.4rem;font-weight:800;font-family:'Space Grotesk',sans-serif;background:linear-gradient(135deg,var(--violet-light),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">2 AUs</div>
+      <div style="color:var(--text-muted);font-size:0.85rem;margin-top:4px;">AU04 + AU45 tracked</div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how-it-works">
+  <div class="section-header">
+    <div class="section-label">The Science</div>
+    <h2>How <span class="gradient-text">NeuroFlow</span> Works</h2>
+    <p>Two complementary tools working together — one lives in your browser, one on the server.</p>
+  </div>
+  <div class="cards-grid">
+    <div class="card animate-slide-up delay-1">
+      <div class="card-icon cyan">🎥</div>
+      <div class="badge badge-cyan" style="margin-bottom:14px;">LIVE — Browser</div>
+      <h3>MediaPipe Companion</h3>
+      <p>Runs entirely in your browser using your webcam. Monitors <strong style="color:var(--text-primary)">browDownLeft</strong> + <strong style="color:var(--text-primary)">browDownRight</strong> blendshapes (AU04 proxy) for real-time furrowing.</p>
+      <div style="margin-top:20px;padding:12px 16px;background:rgba(0,212,255,0.06);border-radius:8px;border:1px solid rgba(0,212,255,0.15);">
+        <code style="font-size:0.8rem;color:var(--cyan);">if browDown > 0.7 for 3s → .high-load-mode</code>
+      </div>
+    </div>
+    <div class="card animate-slide-up delay-2">
+      <div class="card-icon violet">🔬</div>
+      <div class="badge badge-violet" style="margin-bottom:14px;">AUDIT — Python Server</div>
+      <h3>Py-Feat Auditor</h3>
+      <p>Runs on a local Python server during testing. Precisely tracks <strong style="color:var(--text-primary)">AU04</strong> (Brow Furrow) and <strong style="color:var(--text-primary)">AU45</strong> (Blink Rate) to generate a <em>Cognitive Load Score</em>.</p>
+      <div style="margin-top:20px;padding:12px 16px;background:rgba(124,58,237,0.08);border-radius:8px;border:1px solid rgba(124,58,237,0.2);">
+        <code style="font-size:0.8rem;color:var(--violet-light);">CLS = (AU04 × 0.7) + (AU45_norm × 0.3)</code>
+      </div>
+    </div>
+    <div class="card animate-slide-up delay-3">
+      <div class="card-icon green">✅</div>
+      <div class="badge badge-green" style="margin-bottom:14px;">INTERVENTION</div>
+      <h3>Focus Mode</h3>
+      <p>When overload is detected, NeuroFlow applies <strong style="color:var(--text-primary)">Focus Mode</strong>: greyscale filter, sidebars collapse, animations stop, font size increases. Instant calm.</p>
+      <div style="margin-top:20px;padding:12px 16px;background:rgba(34,197,94,0.06);border-radius:8px;border:1px solid rgba(34,197,94,0.2);">
+        <code style="font-size:0.8rem;color:var(--green);">body.high-load-mode → calm CSS</code>
+      </div>
+    </div>
+    <div class="card animate-slide-up delay-4">
+      <div class="card-icon rose">📊</div>
+      <div class="badge badge-rose" style="margin-bottom:14px;">REPORT</div>
+      <h3>Neuro-Audit Report</h3>
+      <p>After a session, generate a developer report: <em>"This popup causes a 40% spike in AU04 stress for neurodivergent testers."</em> Actionable, quantified accessibility insights.</p>
+      <div style="margin-top:20px;padding:12px 16px;background:rgba(244,63,94,0.06);border-radius:8px;border:1px solid rgba(244,63,94,0.2);">
+        <code style="font-size:0.8rem;color:var(--rose);">POST /analyze → AU timeline JSON</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Tech Stack -->
+<section id="tech">
+  <div class="section-header">
+    <div class="section-label">Technology</div>
+    <h2>The <span class="gradient-text">Double-Threat</span> Stack</h2>
+    <p>Two state-of-the-art computer vision libraries, each doing what it does best.</p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div class="glass" style="padding:36px;">
+      <div style="font-size:3rem;margin-bottom:16px;">🎯</div>
+      <h3 style="color:var(--cyan);margin-bottom:8px;">MediaPipe</h3>
+      <p style="margin-bottom:16px;">Google's ML framework — Face Landmarker with 52 blendshape coefficients running at 30fps in the browser. Zero installation, zero data upload.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+        <li style="color:var(--text-secondary);font-size:0.9rem;">🔸 JavaScript / WebAssembly</li>
+        <li style="color:var(--text-secondary);font-size:0.9rem;">🔸 GPU-accelerated</li>
+        <li style="color:var(--text-secondary);font-size:0.9rem;">🔸 Tracks <code style="color:var(--cyan)">browDownLeft</code>, <code style="color:var(--cyan)">browDownRight</code></li>
+        <li style="color:var(--text-secondary);font-size:0.9rem;">🔸 Triggers real-time UI changes</li>
+      </ul>
+    </div>
+    <div class="glass" style="padding:36px;">
+      <div style="font-size:3rem;margin-bottom:16px;">🧪</div>
+      <h3 style="color:var(--violet-light);margin-bottom:8px;">Py-Feat</h3>
+      <p style="margin-bottom:16px;">Python's scientific facial action coding library. Precisely measures FACS Action Units from video with research-grade accuracy.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+        <li style="color:var(--text-secondary);font-size:0.9rem;">🔸 Python / Flask Server</li>
+        <li style="color:var(--text-secondary);font-size:0.9rem;">🔸 FACS AU04 (Brow Furrow)</li>
+        <li style="color:var(--text-secondary);font-size:0.9rem;">🔸 FACS AU45 (Blink Rate)</li>
+        <li style="color:var(--text-secondary);font-size:0.9rem;">🔸 Cognitive Load Score output</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Use Cases -->
+<section id="use-cases">
+  <div class="section-header">
+    <div class="section-label">Business Model</div>
+    <h2>The <span class="gradient-text">Unicorn</span> Opportunity</h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon violet">🏢</div>
+      <h3>B2B Neuro-Audit SaaS</h3>
+      <p>Companies pay to run their websites through the Neuro-Auditor before launch. Quantified accessibility reports with AU-level precision.</p>
+      <div style="margin-top:16px;font-size:0.85rem;color:var(--violet-light);font-weight:600;">→ "Accessibility as a Service"</div>
+    </div>
+    <div class="card">
+      <div class="card-icon cyan">🌐</div>
+      <h3>Browser Extension</h3>
+      <p>Personal subscription for neurodivergent users. MediaPipe runs passively and automatically "cleans" any website based on real-time stress detection.</p>
+      <div style="margin-top:16px;font-size:0.85rem;color:var(--cyan);font-weight:600;">→ "Clean the Web, Automatically"</div>
+    </div>
+    <div class="card">
+      <div class="card-icon green">🎓</div>
+      <h3>EdTech Integration</h3>
+      <p>Alert teachers when students show signs of cognitive overload during online lessons. Adaptive learning platforms that respond to student stress in real-time.</p>
+      <div style="margin-top:16px;font-size:0.85rem;color:var(--green);font-weight:600;">→ "Empathetic E-Learning"</div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo CTA -->
+<section style="text-align:center;padding:80px 48px;">
+  <div style="max-width:600px;margin:0 auto;">
+    <div class="hero-badge" style="margin:0 auto 24px;display:inline-flex;"><span class="dot"></span> Live Demo Ready</div>
+    <h2 style="margin-bottom:16px;">See it <span class="gradient-text">in action</span>.</h2>
+    <p style="margin-bottom:36px;">Open the Stress-Test Dashboard. Watch AU04 spike on the Chaos UI — then click one button to prove the intervention works.</p>
+    <a href="dashboard.html" class="btn btn-primary" style="font-size:1.1rem;padding:16px 36px;animation:glow-pulse 2s infinite;">🚀 Open Stress-Test Dashboard</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div>⚡ NeuroFlow — Built for humanity's neurodivergent 20%</div>
+  <div style="margin-top:8px;font-size:0.75rem;">MediaPipe · Py-Feat · Chart.js · Flask</div>
+</footer>
+
+</body>
+</html>

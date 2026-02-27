@@ -1,0 +1,5 @@
+flask
+flask-cors
+feat
+opencv-python
+numpy

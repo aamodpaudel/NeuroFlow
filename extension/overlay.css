@@ -1,0 +1,559 @@
+/* ============================================================
+   NeuroFlow — overlay.css
+   Injected into every page via content_scripts in manifest.
+   Styles for: floating pill, all 4 modes, and overlays.
+============================================================ */
+
+/* ── Floating status pill ────────────────────────────────── */
+#nf-pill {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 2147483647 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 14px !important;
+    border-radius: 100px !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    background: rgba(10, 14, 26, 0.92) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+    color: #F1F5F9 !important;
+    user-select: none !important;
+}
+
+#nf-pill:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+}
+
+#nf-pill .nf-pill-dot {
+    width: 7px !important;
+    height: 7px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    background: #22C55E !important;
+}
+
+#nf-pill .nf-pill-dot.warn {
+    background: #F59E0B !important;
+}
+
+#nf-pill .nf-pill-dot.alert {
+    background: #F43F5E !important;
+    animation: nf-pulse 1s infinite !important;
+}
+
+#nf-pill .nf-pill-icon {
+    font-size: 14px !important;
+}
+
+#nf-pill .nf-pill-score {
+    color: #94A3B8 !important;
+    font-weight: 600 !important;
+}
+
+@keyframes nf-pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+/* ── Minimised pill ──────────────────────────────────────── */
+#nf-pill.nf-minimised {
+    padding: 8px !important;
+    gap: 0 !important;
+}
+
+#nf-pill.nf-minimised .nf-pill-text {
+    display: none !important;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* 🛡  MODE: NeuroShield (ADHD / Neurodivergent)              */
+/* ─────────────────────────────────────────────────────────── */
+body.nf-neuroshield *,
+body.nf-neuroshield *::before,
+body.nf-neuroshield *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+}
+
+/* Strip ad/banner/sidebar patterns */
+body.nf-neuroshield [class*="ad-"],
+body.nf-neuroshield [class*="-ad"],
+body.nf-neuroshield [id*="ad-"],
+body.nf-neuroshield [class*="ads"],
+body.nf-neuroshield [class*="banner"],
+body.nf-neuroshield [class*="sidebar"],
+body.nf-neuroshield [id*="sidebar"],
+body.nf-neuroshield [class*="cookie"],
+body.nf-neuroshield [id*="cookie"],
+body.nf-neuroshield [class*="popup"],
+body.nf-neuroshield [class*="modal"]:not([class*="content"]):not([class*="main"]) {
+    display: none !important;
+}
+
+/* Readable typography */
+body.nf-neuroshield {
+    font-size: 17px !important;
+    line-height: 1.85 !important;
+}
+
+body.nf-neuroshield p,
+body.nf-neuroshield li,
+body.nf-neuroshield td {
+    font-size: 17px !important;
+    line-height: 1.85 !important;
+    color: #1a1a1a !important;
+}
+
+body.nf-neuroshield h1 {
+    font-size: 2rem !important;
+}
+
+body.nf-neuroshield h2 {
+    font-size: 1.5rem !important;
+}
+
+body.nf-neuroshield h3 {
+    font-size: 1.2rem !important;
+}
+
+/* Constrain width for focus */
+body.nf-neuroshield main,
+body.nf-neuroshield article,
+body.nf-neuroshield [role="main"],
+body.nf-neuroshield .content,
+body.nf-neuroshield #content {
+    max-width: 740px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Tone down images */
+body.nf-neuroshield img {
+    filter: saturate(0.7) !important;
+}
+
+/* Mute background noise */
+body.nf-neuroshield [class*="background"],
+body.nf-neuroshield section[style*="background-image"] {
+    background-image: none !important;
+}
+
+/* Focus mode transition */
+body.nf-neuroshield {
+    filter: none !important;
+}
+
+body.nf-neuroshield.nf-high-load {
+    filter: grayscale(60%) !important;
+    transition: filter 1.2s ease !important;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* 💻  MODE: DevCompass (Developers)                          */
+/* ─────────────────────────────────────────────────────────── */
+body.nf-devcompass {
+    /* Minimal page changes — devs need full content */
+}
+
+body.nf-devcompass [class*="cookie"],
+body.nf-devcompass [class*="gdpr"],
+body.nf-devcompass [id*="cookie"] {
+    display: none !important;
+}
+
+/* DevCompass floating Pomodoro timer */
+#nf-pomodoro {
+    position: fixed !important;
+    top: 80px !important;
+    right: 16px !important;
+    z-index: 2147483646 !important;
+    background: rgba(10, 14, 26, 0.92) !important;
+    border: 1.5px solid rgba(124, 58, 237, 0.4) !important;
+    border-radius: 14px !important;
+    padding: 14px 18px !important;
+    min-width: 160px !important;
+    text-align: center !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    color: #F1F5F9 !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+#nf-pomodoro .nf-pm-label {
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #7C3AED !important;
+    display: block !important;
+    margin-bottom: 6px !important;
+}
+
+#nf-pomodoro .nf-pm-time {
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    letter-spacing: -1px !important;
+    display: block !important;
+    color: #F1F5F9 !important;
+    font-variant-numeric: tabular-nums !important;
+}
+
+#nf-pomodoro .nf-pm-phase {
+    font-size: 10px !important;
+    color: #94A3B8 !important;
+    margin-top: 4px !important;
+    display: block !important;
+}
+
+#nf-pomodoro .nf-pm-bar-bg {
+    height: 4px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 2px !important;
+    margin-top: 10px !important;
+    overflow: hidden !important;
+}
+
+#nf-pomodoro .nf-pm-bar-fill {
+    height: 100% !important;
+    background: linear-gradient(90deg, #7C3AED, #00D4FF) !important;
+    border-radius: 2px !important;
+    width: 0% !important;
+    transition: width 1s linear !important;
+}
+
+/* Break overlay */
+#nf-break-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2147483645 !important;
+    background: rgba(5, 8, 16, 0.88) !important;
+    backdrop-filter: blur(8px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    color: #F1F5F9 !important;
+}
+
+#nf-break-overlay h2 {
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    color: #F1F5F9 !important;
+    margin: 0 !important;
+}
+
+#nf-break-overlay p {
+    color: #94A3B8 !important;
+    font-size: 1rem !important;
+    text-align: center !important;
+    max-width: 380px !important;
+    margin: 0 !important;
+    line-height: 1.6 !important;
+}
+
+#nf-break-overlay button {
+    padding: 12px 28px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    background: linear-gradient(135deg, #7C3AED, #A855F7) !important;
+    color: #fff !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* 🌿  MODE: ZenFlow (Mental Health)                          */
+/* ─────────────────────────────────────────────────────────── */
+body.nf-zenflow [class*="cookie"],
+body.nf-zenflow [class*="notification"] {
+    display: none !important;
+}
+
+/* Calming page tint */
+body.nf-zenflow::before {
+    content: '' !important;
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(124, 58, 237, 0.04) !important;
+    pointer-events: none !important;
+    z-index: 2147483640 !important;
+}
+
+body.nf-zenflow {
+    filter: saturate(0.85) !important;
+}
+
+/* Breathing exercise overlay */
+#nf-breathing {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2147483647 !important;
+    background: rgba(5, 8, 16, 0.92) !important;
+    backdrop-filter: blur(16px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    color: #F1F5F9 !important;
+}
+
+#nf-breathing .nf-breath-ring {
+    width: 160px !important;
+    height: 160px !important;
+    border-radius: 50% !important;
+    border: 3px solid rgba(168, 85, 247, 0.3) !important;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.2), transparent) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    animation: nf-breathe 4s ease-in-out infinite !important;
+}
+
+#nf-breathing .nf-breath-inner {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle, #7C3AED, #A855F7) !important;
+    animation: nf-breathe-inner 4s ease-in-out infinite !important;
+}
+
+#nf-breathing .nf-breath-label {
+    font-size: 1.4rem !important;
+    font-weight: 700 !important;
+    color: #F1F5F9 !important;
+}
+
+#nf-breathing .nf-breath-sub {
+    font-size: 0.9rem !important;
+    color: #94A3B8 !important;
+}
+
+#nf-breathing button {
+    padding: 10px 24px !important;
+    border-radius: 8px !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.15) !important;
+    background: transparent !important;
+    color: #94A3B8 !important;
+    font-size: 0.85rem !important;
+    cursor: pointer !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    margin-top: 8px !important;
+}
+
+@keyframes nf-breathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+    }
+
+    50% {
+        transform: scale(1.4);
+        box-shadow: 0 0 60px rgba(124, 58, 237, 0.5);
+    }
+}
+
+@keyframes nf-breathe-inner {
+
+    0%,
+    100% {
+        transform: scale(0.7);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Step-away prompt */
+#nf-stepaway {
+    position: fixed !important;
+    bottom: 80px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 2147483646 !important;
+    background: rgba(10, 14, 26, 0.95) !important;
+    border: 1.5px solid rgba(168, 85, 247, 0.4) !important;
+    border-radius: 14px !important;
+    padding: 16px 24px !important;
+    text-align: center !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    color: #F1F5F9 !important;
+    font-size: 0.9rem !important;
+    max-width: 320px !important;
+    animation: nf-slide-up 0.4s ease !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+#nf-stepaway strong {
+    color: #A855F7 !important;
+    display: block !important;
+    margin-bottom: 6px !important;
+    font-size: 1rem !important;
+}
+
+#nf-stepaway .nf-sa-close {
+    position: absolute !important;
+    top: 8px !important;
+    right: 10px !important;
+    background: none !important;
+    border: none !important;
+    color: #475569 !important;
+    cursor: pointer !important;
+    font-size: 1rem !important;
+}
+
+@keyframes nf-slide-up {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* 🎓  MODE: FocusLens (Students)                             */
+/* ─────────────────────────────────────────────────────────── */
+body.nf-focuslens [class*="sidebar"],
+body.nf-focuslens [class*="recommend"],
+body.nf-focuslens [class*="trending"],
+body.nf-focuslens [class*="related"],
+body.nf-focuslens [class*="social"],
+body.nf-focuslens [class*="share"],
+body.nf-focuslens [class*="comment"] {
+    filter: blur(6px) !important;
+    pointer-events: none !important;
+    opacity: 0.3 !important;
+    transition: all 0.5s ease !important;
+}
+
+body.nf-focuslens [class*="sidebar"]:hover,
+body.nf-focuslens [class*="recommend"]:hover {
+    filter: none !important;
+    pointer-events: auto !important;
+    opacity: 1 !important;
+}
+
+/* Spotlight on main content */
+body.nf-focuslens main,
+body.nf-focuslens article,
+body.nf-focuslens [role="main"] {
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.08) !important;
+    border-radius: 8px !important;
+}
+
+/* Pause autoplay videos */
+body.nf-focuslens video[autoplay] {
+    display: none !important;
+}
+
+/* Study timer overlay */
+#nf-studytimer {
+    position: fixed !important;
+    top: 16px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 2147483646 !important;
+    background: rgba(10, 14, 26, 0.88) !important;
+    border: 1.5px solid rgba(124, 58, 237, 0.3) !important;
+    border-radius: 100px !important;
+    padding: 8px 20px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    color: #F1F5F9 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+#nf-studytimer .nf-st-icon {
+    font-size: 15px !important;
+}
+
+#nf-studytimer .nf-st-time {
+    font-variant-numeric: tabular-nums !important;
+    color: #00D4FF !important;
+}
+
+#nf-studytimer .nf-st-sep {
+    color: #475569 !important;
+}
+
+#nf-studytimer .nf-st-cls {
+    color: #94A3B8 !important;
+    font-weight: 500 !important;
+}
+
+/* Focus check prompt */
+#nf-focuscheck {
+    position: fixed !important;
+    bottom: 80px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 2147483646 !important;
+    background: rgba(10, 14, 26, 0.95) !important;
+    border: 1.5px solid rgba(0, 212, 255, 0.3) !important;
+    border-radius: 14px !important;
+    padding: 16px 24px !important;
+    text-align: center !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    color: #F1F5F9 !important;
+    font-size: 0.9rem !important;
+    max-width: 300px !important;
+    backdrop-filter: blur(12px) !important;
+    animation: nf-slide-up 0.4s ease !important;
+}
+
+#nf-focuscheck strong {
+    color: #00D4FF !important;
+    display: block !important;
+    margin-bottom: 6px !important;
+}
+
+#nf-focuscheck button {
+    margin-top: 10px !important;
+    padding: 8px 18px !important;
+    border-radius: 6px !important;
+    border: none !important;
+    background: rgba(0, 212, 255, 0.15) !important;
+    color: #00D4FF !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    font-family: 'Inter', system-ui, sans-serif !important;
+    font-size: 0.85rem !important;
+}

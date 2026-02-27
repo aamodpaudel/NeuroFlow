@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeuroFlow Settings</title>
+    <link rel="stylesheet" href="options.css" />
+    <script src="../lib/chart.min.js"></script>
+</head>
+
+<body>
+
+    <nav class="opt-nav">
+        <a href="#" class="opt-logo">⚡ NeuroFlow Settings</a>
+        <div class="opt-nav-links">
+            <a href="#general" class="opt-nav-link active" data-section="general">General</a>
+            <a href="#modes" class="opt-nav-link" data-section="modes">Mode Profiles</a>
+            <a href="#domains" class="opt-nav-link" data-section="domains">Domains</a>
+            <a href="#history" class="opt-nav-link" data-section="history">Session History</a>
+        </div>
+        <button class="opt-save-btn" id="opt-save">Save Settings</button>
+    </nav>
+
+    <div class="opt-body">
+
+        <!-- ── General ── -->
+        <section class="opt-section" id="sec-general">
+            <div class="opt-section-header">
+                <h2>General Settings</h2>
+                <p>Configure detection behaviour and global thresholds.</p>
+            </div>
+
+            <div class="opt-card">
+                <div class="opt-field">
+                    <div class="opt-field-label">
+                        <span>AU04 Trigger Threshold</span>
+                        <span class="opt-field-hint" id="threshold-hint">0.65</span>
+                    </div>
+                    <p class="opt-field-desc">Sensitivity of brow-furrow detection. Lower = triggers earlier.
+                        Recommended: 0.55–0.75.</p>
+                    <input type="range" id="opt-threshold" min="0.3" max="0.9" step="0.05" value="0.65"
+                        class="opt-slider" />
+                </div>
+
+                <div class="opt-field">
+                    <div class="opt-field-label">
+                        <span>Trigger Delay (seconds)</span>
+                        <span class="opt-field-hint" id="delay-hint">3</span>
+                    </div>
+                    <p class="opt-field-desc">How long AU04 must stay above threshold before Focus Mode activates.</p>
+                    <input type="range" id="opt-delay" min="1" max="10" step="1" value="3" class="opt-slider" />
+                </div>
+
+                <div class="opt-field">
+                    <div class="opt-field-label">
+                        <span>Break Reminder Interval (DevCompass)</span>
+                        <span class="opt-field-hint" id="break-hint">45 min</span>
+                    </div>
+                    <p class="opt-field-desc">How often to prompt a break in DevCompass mode. Set to 0 to disable.</p>
+                    <input type="range" id="opt-break" min="15" max="120" step="5" value="45" class="opt-slider" />
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Mode Profiles ── -->
+        <section class="opt-section hidden" id="sec-modes">
+            <div class="opt-section-header">
+                <h2>Mode Profiles</h2>
+                <p>Customise what each mode does when activated.</p>
+            </div>
+
+            <div class="opt-modes-grid">
+                <div class="opt-mode-card" data-mode="neuroshield">
+                    <div class="opt-mode-header">
+                        <span class="opt-mode-icon">🛡</span>
+                        <div>
+                            <div class="opt-mode-name">NeuroShield</div>
+                            <div class="opt-mode-target">ADHD · Autism · Sensory Sensitivity</div>
+                        </div>
+                    </div>
+                    <div class="opt-mode-options">
+                        <label class="opt-check"><input type="checkbox" id="ns-hide-ads" checked /> Hide ads &
+                            banners</label>
+                        <label class="opt-check"><input type="checkbox" id="ns-stop-anim" checked /> Stop
+                            animations</label>
+                        <label class="opt-check"><input type="checkbox" id="ns-enlarge-font" checked /> Enlarge font
+                            (18px)</label>
+                        <label class="opt-check"><input type="checkbox" id="ns-single-col" checked /> Single-column
+                            layout</label>
+                        <label class="opt-check"><input type="checkbox" id="ns-grayscale" checked /> Greyscale on high
+                            load</label>
+                        <label class="opt-check"><input type="checkbox" id="ns-hide-popups" checked /> Auto-dismiss
+                            popups</label>
+                    </div>
+                </div>
+
+                <div class="opt-mode-card devcompass" data-mode="devcompass">
+                    <div class="opt-mode-header">
+                        <span class="opt-mode-icon">💻</span>
+                        <div>
+                            <div class="opt-mode-name">DevCompass</div>
+                            <div class="opt-mode-target">Software Developers · Technical Users</div>
+                        </div>
+                    </div>
+                    <div class="opt-mode-options">
+                        <label class="opt-check"><input type="checkbox" id="dc-pomodoro" checked /> Show Pomodoro
+                            timer</label>
+                        <label class="opt-check"><input type="checkbox" id="dc-break-notify" checked /> Break
+                            notifications</label>
+                        <label class="opt-check"><input type="checkbox" id="dc-session-track" checked /> Track session
+                            length</label>
+                        <label class="opt-check"><input type="checkbox" id="dc-break-overlay" checked /> Full-screen
+                            break prompt</label>
+                        <div class="opt-field" style="margin-top:8px;">
+                            <label class="opt-field-label" style="font-size:0.75rem;"><span>Pomodoro Work
+                                    Duration</span><span class="opt-field-hint" id="pomo-hint">25 min</span></label>
+                            <input type="range" id="opt-pomo" min="10" max="60" step="5" value="25"
+                                class="opt-slider" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="opt-mode-card zenflow" data-mode="zenflow">
+                    <div class="opt-mode-header">
+                        <span class="opt-mode-icon">🌿</span>
+                        <div>
+                            <div class="opt-mode-name">ZenFlow</div>
+                            <div class="opt-mode-target">Mental Health · Anxiety · Stress</div>
+                        </div>
+                    </div>
+                    <div class="opt-mode-options">
+                        <label class="opt-check"><input type="checkbox" id="zf-breathing" checked /> Breathing exercise
+                            on spike</label>
+                        <label class="opt-check"><input type="checkbox" id="zf-calm-tint" checked /> Calming page
+                            tint</label>
+                        <label class="opt-check"><input type="checkbox" id="zf-stepaway" checked /> "Step away"
+                            prompts</label>
+                        <label class="opt-check"><input type="checkbox" id="zf-log" checked /> Log stress events</label>
+                        <label class="opt-check"><input type="checkbox" id="zf-desaturate" checked /> Desaturate harsh
+                            colours</label>
+                    </div>
+                </div>
+
+                <div class="opt-mode-card focuslens" data-mode="focuslens">
+                    <div class="opt-mode-header">
+                        <span class="opt-mode-icon">🎓</span>
+                        <div>
+                            <div class="opt-mode-name">FocusLens</div>
+                            <div class="opt-mode-target">Students · Reading · Research</div>
+                        </div>
+                    </div>
+                    <div class="opt-mode-options">
+                        <label class="opt-check"><input type="checkbox" id="fl-blur-side" checked /> Blur sidebars &
+                            distractions</label>
+                        <label class="opt-check"><input type="checkbox" id="fl-pause-video" checked /> Pause autoplay
+                            videos</label>
+                        <label class="opt-check"><input type="checkbox" id="fl-timer" checked /> Show study
+                            timer</label>
+                        <label class="opt-check"><input type="checkbox" id="fl-focus-check" checked /> Fatigue prompt
+                            (low blink)</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Domain Rules ── -->
+        <section class="opt-section hidden" id="sec-domains">
+            <div class="opt-section-header">
+                <h2>Domain Rules</h2>
+                <p>Control which websites NeuroFlow activates on.</p>
+            </div>
+            <div class="opt-card" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                <div>
+                    <div class="opt-domain-label">✅ Whitelist — Always apply</div>
+                    <p class="opt-field-desc">NeuroFlow always activates on these domains, regardless of global setting.
+                    </p>
+                    <textarea id="opt-whitelist" class="opt-textarea"
+                        placeholder="github.com&#10;notion.so&#10;docs.google.com"></textarea>
+                </div>
+                <div>
+                    <div class="opt-domain-label">🚫 Blacklist — Never apply</div>
+                    <p class="opt-field-desc">NeuroFlow is disabled on these domains (e.g. your own projects, test
+                        sites).</p>
+                    <textarea id="opt-blacklist" class="opt-textarea"
+                        placeholder="localhost&#10;127.0.0.1&#10;staging.myapp.com"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Session History ── -->
+        <section class="opt-section hidden" id="sec-history">
+            <div class="opt-section-header">
+                <h2>Session History</h2>
+                <p>Your cognitive load data from the current session.</p>
+            </div>
+            <div class="opt-stats-row">
+                <div class="opt-stat-card">
+                    <div class="opt-stat-val" id="h-session">–</div>
+                    <div class="opt-stat-lbl">Session Duration</div>
+                </div>
+                <div class="opt-stat-card">
+                    <div class="opt-stat-val rose" id="h-peak">–</div>
+                    <div class="opt-stat-lbl">Peak CLS</div>
+                </div>
+                <div class="opt-stat-card">
+                    <div class="opt-stat-val violet" id="h-avg">–</div>
+                    <div class="opt-stat-lbl">Avg CLS</div>
+                </div>
+                <div class="opt-stat-card">
+                    <div class="opt-stat-val cyan" id="h-total">–</div>
+                    <div class="opt-stat-lbl">Data Points</div>
+                </div>
+            </div>
+            <div class="opt-card" style="margin-top:16px;">
+                <div
+                    style="font-size:0.75rem;font-weight:700;color:var(--text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;">
+                    CLS History</div>
+                <div style="height:200px;position:relative;"><canvas id="opt-history-chart"></canvas></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:12px;">
+                <button class="opt-btn" id="h-export">⬇ Export CSV</button>
+                <button class="opt-btn opt-btn-danger" id="h-clear">🗑 Clear Session</button>
+            </div>
+        </section>
+
+    </div><!-- .opt-body -->
+
+    <script src="options.js"></script>
+</body>
+
+</html>
